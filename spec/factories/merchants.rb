@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   factory :merchant do
-    reference { 'MyString' }
-    email { 'MyString' }
-    live_on { '2023-10-15' }
-    payout_frequency { 1 }
-    minimum_monthly_fee { '9.99' }
+    reference { 'wintheiser_bernhard' }
+    email { 'info@wintheiser-bernhard.com' }
+    live_on { Time.zone.today }
+    disbursement_frequency { 'daily' }
+    minimum_monthly_fee { 15.0 }
   end
 end

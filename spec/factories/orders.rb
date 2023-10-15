@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :order do
-    merchant { nil }
-    amount { '9.99' }
-    order_date { '2023-10-15' }
+    merchant { create(:merchant) }
+    amount { 100 }
+    order_date { Time.zone.today }
   end
 end
