@@ -9,6 +9,8 @@ development:
 
 test:
   <<: *default
+  user: postgres
+  host: localhost
   database: sequra_pay_hub_test
 
 production:
