@@ -89,3 +89,8 @@ RSpec/MultipleExpectations:
   Enabled: false
 RSpec/ExampleLength:
   Max: 25
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/lib/tasks/import.rake_spec.rb'
+FactoryBot/FactoryAssociationWithStrategy:
+  Enabled: false
