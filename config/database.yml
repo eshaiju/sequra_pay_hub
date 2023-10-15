@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: sequra_pay_hub_development
+
+test:
+  <<: *default
+  database: sequra_pay_hub_test
+
+production:
+  <<: *default
+  database: sequra_pay_hub_production
+  username: sequra_pay_hub
+  password: <%= ENV["SEQURA_PAY_HUB_DATABASE_PASSWORD"] %>

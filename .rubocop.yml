@@ -1,0 +1,85 @@
+require:
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: true
+
+Metrics/ModuleLength:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - staging
+    - test
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/WordArray:
+  EnforcedStyle: brackets
+Metrics/MethodLength:
+  Max: 100
+
+Layout/LineContinuationLeadingSpace:
+  Enabled: true
+  EnforcedStyle: trailing
+Lint/MissingSuper:
+  Enabled: false
+Style/SoleNestedConditional:
+  Enabled: false
+Style/FetchEnvVar:
+  Enabled: false
+Style/OpenStructUse:
+  Enabled: false
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false
+Rails/DynamicFindBy:
+  Enabled: false
+Rails/Delegate:
+  Enabled: false
+Rails/FreezeTime:
+  Enabled: false
+Rails/I18nLocaleTexts:
+  Enabled: false
+Rails/TransactionExitStatement:
+  Enabled: false
+Rails/HasManyOrHasOneDependent:
+  Enabled: true
+Naming/BlockForwarding:
+  Enabled: true
+  EnforcedStyle: explicit
+Naming/PredicateName:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+Style/ExponentialNotation:
+  Enabled: false
+Style/HashAsLastArrayItem:
+  Enabled: false
+Style/FormatString:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+Gemspec/RequireMFA:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: true
