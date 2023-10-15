@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_15_095508) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_15_120106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,4 +28,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_095508) do
     t.enum "disbursement_frequency", default: "daily", null: false, enum_type: "disbursement_frequency"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "merchant_id", null: false
+    t.decimal "amount"
+    t.date "order_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_orders_on_merchant_id"
+  end
+
+  add_foreign_key "orders", "merchants"
 end
