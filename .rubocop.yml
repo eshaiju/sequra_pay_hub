@@ -85,3 +85,8 @@ Gemspec/RequireMFA:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: true
+
+Rspec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Max: 25
