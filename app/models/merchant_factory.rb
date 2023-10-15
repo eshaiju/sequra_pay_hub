@@ -28,6 +28,6 @@ class MerchantFactory
   end
 
   def merchant
-    @merchant ||= Merchant.find_or_create_by!(reference: row['reference'])
+    @merchant ||= Merchant.find_or_initialize_by(reference: row['reference'])
   end
 end

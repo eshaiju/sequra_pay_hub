@@ -18,14 +18,19 @@ class OrderFactory
   attr_reader :row
 
   def save_order_details
+    if merchant.blank?
+      Rails.logger.error("Merchant not found for reference: #{row['merchant_reference']}")
+      return
+    end
+
     Order.create!({
-                    merchant: find_or_create_merchant,
+                    merchant: merchant,
                     amount: row['amount'].to_f,
                     order_date: row['created_at']
                   })
   end
 
-  def find_or_create_merchant
-    Merchant.find_or_create_by!(reference: row['merchant_reference'])
+  def merchant
+    @merchant ||= Merchant.find_by(reference: row['merchant_reference'])
   end
 end
