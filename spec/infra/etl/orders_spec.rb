@@ -6,6 +6,10 @@ RSpec.describe Etl::Orders do
   describe '.load' do
     let(:csv_path) { Rails.root.join('spec/fixtures/files/orders.csv') }
 
+    before do
+      Etl::Merchants.load
+    end
+
     it 'loads merchants from a CSV file and saves them' do
       expect do
         described_class.load(path: csv_path)
