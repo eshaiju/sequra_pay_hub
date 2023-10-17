@@ -25,3 +25,5 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
 end
+
+gem 'sidekiq', '~> 7.1'
