@@ -6,4 +6,12 @@ class Disbursement < ApplicationRecord
   validates :merchant_id, :disbursement_date, :total_amount, :total_fee, presence: true
   validates :reference, uniqueness: true
   validates :total_amount, :total_fee, numericality: { greater_than: 0 }
+
+  before_validation :generate_reference, on: :create
+
+  private
+
+  def generate_reference
+    self.reference = "#{merchant&.reference}_#{disbursement_date&.strftime('%Y%m%d')}"
+  end
 end

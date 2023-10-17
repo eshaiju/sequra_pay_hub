@@ -37,4 +37,13 @@ RSpec.describe Disbursement do
     disbursement = build(:disbursement, total_fee: -10)
     expect(disbursement).not_to be_valid
   end
+
+  it 'generates a reference before validation' do
+    merchant = create(:merchant)
+    disbursement = build(:disbursement, merchant: merchant, disbursement_date: Date.new(2023, 1, 15))
+
+    disbursement.valid?
+
+    expect(disbursement.reference).to eq("#{merchant.reference}_20230115")
+  end
 end

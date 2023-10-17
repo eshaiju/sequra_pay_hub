@@ -8,4 +8,12 @@ FactoryBot.define do
     disbursement_frequency { 'daily' }
     minimum_monthly_fee { 15.0 }
   end
+
+  factory :second_merchant, class: 'Merchant' do
+    reference { 'another_merchant_reference' }
+    email { 'another_merchant@example.com' }
+    live_on { Time.zone.today }
+    disbursement_frequency { 'weekly' }
+    minimum_monthly_fee { 20.0 }
+  end
 end
