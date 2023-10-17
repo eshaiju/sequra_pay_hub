@@ -92,5 +92,6 @@ RSpec/ExampleLength:
 RSpec/DescribeClass:
   Exclude:
     - 'spec/lib/tasks/import.rake_spec.rb'
+    - 'spec/lib/tasks/calculate_disbursement_summary_spec.rb'
 FactoryBot/FactoryAssociationWithStrategy:
   Enabled: false
