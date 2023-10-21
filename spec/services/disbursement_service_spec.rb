@@ -28,6 +28,20 @@ describe DisbursementService do
         expect(medium_order.reload.disbursement_id).to eq(disbursement.id)
         expect(large_order.reload.disbursement_id).to eq(disbursement.id)
       end
+
+      it 'is idempotent' do
+        small_order
+        medium_order
+        large_order
+
+        expect { disbursement_service.call }.to change(Disbursement, :count).by(1)
+        first_disbursement = Disbursement.last
+
+        expect { disbursement_service.call }.not_to change(Disbursement, :count)
+        second_disbursement = Disbursement.last
+
+        expect(second_disbursement).to eq(first_disbursement)
+      end
     end
 
     context 'when there are no orders for the merchant' do

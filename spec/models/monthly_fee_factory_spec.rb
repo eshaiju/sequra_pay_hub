@@ -23,5 +23,15 @@ RSpec.describe MonthlyFeeFactory do
       expect(created_monthly_fee.total_commissions).to eq(total_commissions)
       expect(created_monthly_fee.monthly_fee).to eq(50.0)
     end
+
+    it 'does not create duplicate monthly fee records' do
+      expect do
+        3.times { monthly_fee_factory.create(fee_month, total_commissions, minimum_monthly_fee) }
+      end.to change(MonthlyFee, :count).by(1)
+
+      created_monthly_fee = MonthlyFee.last
+      expect(created_monthly_fee.total_commissions).to eq(total_commissions)
+      expect(created_monthly_fee.monthly_fee).to eq(50.0)
+    end
   end
 end

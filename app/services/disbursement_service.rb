@@ -15,20 +15,19 @@ class DisbursementService
     total_fee = calculate_total_fee(orders)
 
     ActiveRecord::Base.transaction do
-      disbursement = create_disbursement(orders.sum(&:amount), total_fee)
+      disbursement = find_or_initialize_disbursement
+      disbursement.total_amount = orders.sum(&:amount)
+      disbursement.total_fee = total_fee
+      disbursement.save!
+
       update_orders(disbursement.id)
     end
   end
 
   private
 
-  def create_disbursement(total_amount, total_fee)
-    Disbursement.create!(
-      total_amount: total_amount,
-      total_fee: total_fee,
-      merchant_id: merchant_id,
-      disbursement_date: date
-    )
+  def find_or_initialize_disbursement
+    Disbursement.find_or_initialize_by(merchant_id: merchant_id, disbursement_date: date)
   end
 
   def calculate_total_fee(merchant_orders)
