@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe DisbursementSummaryService, type: :service do
   describe '.generate_summary' do
-    context 'when there are disbursements for the specified year' do
+    context 'when there are disbursements and monthly fees for the specified year' do
       let!(:merchant) { create(:merchant) }
 
       before do
@@ -12,6 +12,9 @@ RSpec.describe DisbursementSummaryService, type: :service do
                               merchant: merchant)
         create(:disbursement, total_amount: 150, total_fee: 15, disbursement_date: Date.new(2022, 2, 20),
                               merchant: merchant)
+
+        create(:monthly_fee, total_commissions: 50, monthly_fee: 5.0, month: Date.new(2022, 1, 1), merchant: merchant)
+        create(:monthly_fee, total_commissions: 60, monthly_fee: 10.0, month: Date.new(2022, 2, 1), merchant: merchant)
       end
 
       it 'generates the summary for the specified year' do
@@ -21,6 +24,8 @@ RSpec.describe DisbursementSummaryService, type: :service do
         expect(summary[:number_of_disbursements]).to eq(2)
         expect(summary[:amount_disbursed]).to eq(250.0)
         expect(summary[:amount_of_order_fees]).to eq(25.0)
+        expect(summary[:monthly_fees_number]).to eq(2)
+        expect(summary[:monthly_fees_sum]).to eq(15.0)
       end
     end
 
@@ -32,6 +37,8 @@ RSpec.describe DisbursementSummaryService, type: :service do
         expect(summary[:number_of_disbursements]).to eq(0)
         expect(summary[:amount_disbursed]).to eq(0.0)
         expect(summary[:amount_of_order_fees]).to eq(0.0)
+        expect(summary[:monthly_fees_number]).to eq(0)
+        expect(summary[:monthly_fees_sum]).to eq(0.0)
       end
     end
   end
