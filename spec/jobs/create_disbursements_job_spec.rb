@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 require 'sidekiq/testing'
-# Sidekiq::Testing.inline!
+Sidekiq::Testing.inline!
 
 RSpec.describe CreateDisbursementsJob do
   it 'enqueues DisbursementJob for each merchant' do
