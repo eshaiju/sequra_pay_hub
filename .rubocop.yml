@@ -98,3 +98,5 @@ FactoryBot/FactoryAssociationWithStrategy:
   Enabled: false
 Rails/FilePath:
   Enabled: false
+RSpec/BeforeAfterAll:
+  Enabled: false
