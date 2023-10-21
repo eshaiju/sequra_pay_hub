@@ -226,6 +226,7 @@ GEM
       tilt (>= 1.4.0)
     thor (1.2.2)
     tilt (2.3.0)
+    timecop (0.9.5)
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -254,6 +255,7 @@ DEPENDENCIES
   rubocop-rspec
   sidekiq (~> 7.1)
   sidekiq-scheduler
+  timecop
   tzinfo-data
 
 RUBY VERSION
