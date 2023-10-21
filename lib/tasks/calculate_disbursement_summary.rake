@@ -12,5 +12,7 @@ namespace :disbursement_summary do
     puts "Number of Disbursements: #{summary[:number_of_disbursements]}"
     puts "Amount Disbursed: #{summary[:amount_disbursed]} €"
     puts "Amount of Order Fees: #{summary[:amount_of_order_fees]} €"
+    puts "Number of monthly fees charged (From minimum monthly fee): #{summary[:monthly_fees_number]}"
+    puts "Amount of monthly fee charged (From minimum monthly fee): #{summary[:monthly_fees_sum]} €"
   end
 end
