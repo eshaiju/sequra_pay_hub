@@ -1,0 +1,15 @@
+calculate_monthly_fee_job:
+  cron: '0 0 1 * *'
+  class: 'CreateMonthlyFeesJob'
+  args:
+    - null
+  queue: default
+  description: 'Calculate monthly fees for the previous month at the beginning of each month'
+
+create_disbursements_job:
+  cron: '0 8 * * *'
+  class: 'CreateDisbursementsJob'
+  args:
+    - null
+  queue: default
+  description: 'Create disbursements for eligible merchants by 8:00 AM UTC'
