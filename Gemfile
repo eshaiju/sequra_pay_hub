@@ -27,3 +27,4 @@ group :development, :test do
 end
 
 gem 'sidekiq', '~> 7.1'
+gem 'sidekiq-scheduler'
