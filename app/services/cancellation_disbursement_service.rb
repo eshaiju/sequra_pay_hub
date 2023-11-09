@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DisbursementService
+class CancellationDisbursementService
   attr_reader :merchant_id, :date, :date_week_ago
 
   def initialize(merchant_id, date)
@@ -10,13 +10,13 @@ class DisbursementService
   end
 
   def call
-    return if orders.empty?
+    return if cancelled_orders.empty?
 
-    total_fee = calculate_total_fee(orders)
+    total_fee = calculate_total_fee(cancelled_orders)
 
     ActiveRecord::Base.transaction do
       disbursement = find_or_initialize_disbursement
-      disbursement.total_amount = orders.sum(&:amount)
+      disbursement.total_amount = cancelled_orders.sum(&:amount)
       disbursement.total_fee = total_fee
       disbursement.save!
 
@@ -29,7 +29,7 @@ class DisbursementService
   def find_or_initialize_disbursement
     Disbursement.find_or_initialize_by(merchant_id: merchant_id,
                                        disbursement_date: date,
-                                       disbursement_type: 'confirmation')
+                                       disbursement_type: 'cancellation')
   end
 
   def calculate_total_fee(merchant_orders)
@@ -39,10 +39,10 @@ class DisbursementService
   end
 
   def update_orders(disbursement_id)
-    Order.where(id: orders.pluck(:id)).update_all(disbursement_id: disbursement_id)
+    Order.where(id: cancelled_orders.pluck(:id)).update_all(disbursement_id: disbursement_id)
   end
 
-  def orders
-    @orders ||= OrderQueryService.new(merchant_id).orders(date, date_week_ago)
+  def cancelled_orders
+    @cancelled_orders ||= OrderQueryService.new(merchant_id).cancelled_orders(date, date_week_ago)
   end
 end
