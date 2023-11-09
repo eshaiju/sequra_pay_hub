@@ -27,7 +27,9 @@ class DisbursementService
   private
 
   def find_or_initialize_disbursement
-    Disbursement.find_or_initialize_by(merchant_id: merchant_id, disbursement_date: date)
+    Disbursement.find_or_initialize_by(merchant_id: merchant_id,
+                                       disbursement_date: date,
+                                       disbursement_type: 'confirmation')
   end
 
   def calculate_total_fee(merchant_orders)

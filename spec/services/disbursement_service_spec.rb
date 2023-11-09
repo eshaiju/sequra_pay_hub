@@ -24,6 +24,7 @@ describe DisbursementService do
         expect(disbursement.total_amount).to eq(small_order.amount + large_order.amount)
         expect(disbursement.total_fee).to eq(0.40 + 4.25)
         expect(disbursement.merchant_id).to eq(merchant.id)
+        expect(disbursement.disbursement_type).to eq('confirmation')
 
         expect(small_order.reload.disbursement_id).to eq(disbursement.id)
         expect(large_order.reload.disbursement_id).to eq(disbursement.id)
