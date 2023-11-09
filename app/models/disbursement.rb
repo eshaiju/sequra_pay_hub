@@ -9,6 +9,8 @@ class Disbursement < ApplicationRecord
 
   before_validation :generate_reference, on: :create
 
+  enum disbursement_type: { cancellation: 'cancellation', confirmation: 'confirmation' }
+
   private
 
   def generate_reference

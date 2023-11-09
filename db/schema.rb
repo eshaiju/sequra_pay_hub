@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_09_145224) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_09_151205) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_145224) do
     t.decimal "total_fee", precision: 8, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "disbursement_type"
     t.index ["merchant_id"], name: "index_disbursements_on_merchant_id"
     t.index ["reference"], name: "index_disbursements_on_reference", unique: true
   end
@@ -61,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_145224) do
     t.string "disbursement_reference"
     t.bigint "disbursement_id"
     t.date "cancelled_at"
+    t.integer "cancellation_disbursement_id"
     t.index ["cancelled_at"], name: "index_orders_on_cancelled_at"
     t.index ["disbursement_id"], name: "index_orders_on_disbursement_id"
     t.index ["merchant_id"], name: "index_orders_on_merchant_id"
