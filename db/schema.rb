@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_18_124541) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_09_145224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_124541) do
     t.datetime "updated_at", null: false
     t.string "disbursement_reference"
     t.bigint "disbursement_id"
+    t.date "cancelled_at"
+    t.index ["cancelled_at"], name: "index_orders_on_cancelled_at"
     t.index ["disbursement_id"], name: "index_orders_on_disbursement_id"
     t.index ["merchant_id"], name: "index_orders_on_merchant_id"
   end
