@@ -18,6 +18,15 @@ RSpec.describe OrderQueryService, type: :service do
       expect(result).to include(daily_order)
     end
 
+    it 'filter calcelled orders for merchant' do
+      first_order = create(:order, merchant: merchant, order_date: date)
+      second_order = create(:order, merchant: merchant, order_date: date, cancelled_at: Date.current)
+
+      result = order_query_service.orders(date, date_week_ago)
+      expect(result).to include(first_order)
+      expect(result).not_to include(second_order)
+    end
+
     it 'returns weekly orders for a merchant' do
       merchant.update!(disbursement_frequency: 'weekly')
       weekly_order = create(:order, merchant: merchant, order_date: date)

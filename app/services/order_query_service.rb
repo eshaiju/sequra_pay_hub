@@ -11,6 +11,7 @@ class OrderQueryService
     Order.select(:id, :amount)
          .joins(:merchant)
          .where(merchant_id: merchant_id)
+         .where(cancelled_at: nil)
          .where(<<~SQL.squish, date: date, date_week_ago: date_week_ago)
            (disbursement_frequency = 'daily' AND order_date = :date) OR
            (disbursement_frequency = 'weekly' AND
