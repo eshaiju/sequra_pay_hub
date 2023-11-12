@@ -39,7 +39,7 @@ class CancellationDisbursementService
   end
 
   def update_orders(disbursement_id)
-    Order.where(id: cancelled_orders.pluck(:id)).update_all(disbursement_id: disbursement_id)
+    Order.where(id: cancelled_orders.pluck(:id)).update_all(cancellation_disbursement_id: disbursement_id)
   end
 
   def cancelled_orders
