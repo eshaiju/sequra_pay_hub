@@ -26,10 +26,10 @@ describe CancellationDisbursementService do
         expect(disbursement.merchant_id).to eq(merchant.id)
         expect(disbursement.disbursement_type).to eq('cancellation')
 
-        expect(small_order.reload.disbursement_id).not_to eq(disbursement.id)
-        expect(large_order.reload.disbursement_id).not_to eq(disbursement.id)
+        expect(small_order.reload.cancellation_disbursement_id).not_to eq(disbursement.id)
+        expect(large_order.reload.cancellation_disbursement_id).not_to eq(disbursement.id)
 
-        expect(cancelled_order.reload.disbursement_id).to eq(disbursement.id)
+        expect(cancelled_order.reload.cancellation_disbursement_id).to eq(disbursement.id)
       end
 
       it 'is idempotent' do
