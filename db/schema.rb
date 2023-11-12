@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_09_151205) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_12_052722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,7 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_151205) do
     t.string "disbursement_reference"
     t.bigint "disbursement_id"
     t.date "cancelled_at"
-    t.integer "cancellation_disbursement_id"
+    t.bigint "cancellation_disbursement_id"
+    t.index ["cancellation_disbursement_id"], name: "index_orders_on_cancellation_disbursement_id"
     t.index ["cancelled_at"], name: "index_orders_on_cancelled_at"
     t.index ["disbursement_id"], name: "index_orders_on_disbursement_id"
     t.index ["merchant_id"], name: "index_orders_on_merchant_id"
@@ -71,5 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_151205) do
   add_foreign_key "disbursements", "merchants"
   add_foreign_key "monthly_fees", "merchants"
   add_foreign_key "orders", "disbursements"
+  add_foreign_key "orders", "disbursements", column: "cancellation_disbursement_id"
   add_foreign_key "orders", "merchants"
 end
